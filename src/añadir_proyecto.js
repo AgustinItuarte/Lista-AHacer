@@ -8,7 +8,7 @@ export function añadirProyecto() {
     const proyectosUl = document.querySelector('ul');
     const proyecto = document.createElement('li');
 
-    proyecto.dataset.id = `${ultimoElem}`;
+    proyecto.dataset.id = `${ultimoElem + 1}`;
     proyecto.className = 'proyecto';
 
     proyecto.textContent = form_proyecto.elements[0].value;
@@ -17,27 +17,36 @@ export function añadirProyecto() {
     proyectosUl.appendChild(proyecto);
 
     localStorage.setItem('proyectos', JSON.stringify(proyectos));
-    console.log(proyectos);
 
 };
 
-export function añadirTareas(evento) {
+export function añadirProyectoEntorno(evento) {
 
     const elemento = evento.target
     if (elemento.classList.contains('proyecto')) {
 
         const contenedor_anterior = document.querySelector('.contenedor-tareas');
-        const main_content = document.querySelector('#contenido')
+        const main_content = document.querySelector('#contenido');
         const contenedor = document.createElement('div');
+        const nom_proyecto = document.createElement('h2');
+        const btn_añadir_tarea = document.createElement('button');
         const id = elemento.dataset.id;
 
         contenedor_anterior.remove();
 
-        main_content.appendChild(contenedor);
-        contenedor.className = 'contenedor-tareas';
+        nom_proyecto.innerHTML = elemento.textContent;
+        btn_añadir_tarea.innerHTML = '+ Añadir Tarea';
 
+        main_content.appendChild(contenedor);
+        contenedor.appendChild(nom_proyecto);
+        contenedor.appendChild(btn_añadir_tarea);
+        contenedor.className = 'contenedor-tareas';
+        btn_añadir_tarea.className = 'btn-añadir-tarea';
+        
         let contenedor_nuevo = document.querySelector('.contenedor-tareas')
         contenedor_nuevo.dataset.id = id;
+        nom_proyecto.dataset.id = id;
+        btn_añadir_tarea.dataset.id = id;
 
     }
 
@@ -48,7 +57,7 @@ export function poblarUl() {
     let proyectos = JSON.parse(localStorage.getItem('proyectos'));
     if(proyectos == null) proyectos = [];
     const div = document.querySelector('ul')
-    
+
     let index = 0;
     proyectos.forEach(proyecto => {
 
@@ -61,5 +70,4 @@ export function poblarUl() {
 
     });
     
-
 }

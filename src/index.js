@@ -1,5 +1,6 @@
 import './style.css';
-import {añadirProyecto, añadirTareas, poblarUl} from './añadir_proyecto.js';
+import {añadirProyecto, añadirProyectoEntorno, poblarUl} from './añadir_proyecto.js';
+import { añadirTarea, listarTareas } from './tareas';
 
 poblarUl();
 
@@ -12,7 +13,11 @@ const form_proyecto = document.querySelector('.form-proyecto');
 
 btn_añadir.addEventListener('click', () => { form_proyecto.hidden = false;  btn_añadir.hidden = true; });
 
-document.addEventListener('click', añadirTareas);
+document.addEventListener('click', añadirProyectoEntorno);
+
+document.addEventListener('click', añadirTarea);
+
+document.addEventListener('click', listarTareas);
 
 btn_cancelar.addEventListener('click', function(e) { 
     e.preventDefault(); 

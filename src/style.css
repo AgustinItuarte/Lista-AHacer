@@ -13,6 +13,8 @@ body {
 body {
     height: 100vh;
     width: 100vw;
+    font-size: 1.5rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background-color: #cbd5e1;
 }
 
@@ -44,12 +46,20 @@ header, footer {
 }
 
 .sidebar {
-    padding: 50px;
     background-color: #64748b;
 }
 
 .main-content {
     background-color: #cbd5e1;
+}
+
+.contenedor-tareas {
+
+}
+
+.sidebar,
+.main-content,
+.contenedor-tareas {
     padding: 50px;
 }
 
