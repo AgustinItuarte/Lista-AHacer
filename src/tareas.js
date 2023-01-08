@@ -40,6 +40,7 @@ export function listarTareas(evento) {
             if (tarea.id === contenido.dataset.id) {
                 
                 let div_tarea = document.createElement('div');
+                div_tarea.className = 'tareas';
                 let titulo = document.createElement('h4');
 
                 titulo.textContent = tarea.titulo;

@@ -31,18 +31,38 @@ export function añadirProyectoEntorno(evento) {
         const nom_proyecto = document.createElement('h2');
         const btn_añadir_tarea = document.createElement('button');
         const id = elemento.dataset.id;
+        const form = document.createElement('form');
+        const label_titulo = document.createElement('label');
+        const input_titulo = document.createElement('input');
+        const btn_aceptar = document.createElement('button');
+        const btn_cancelar = document.createElement('button');
+        const botones = document.createElement('div');
+
+
 
         contenedor_anterior.remove();
 
         nom_proyecto.innerHTML = elemento.textContent;
         btn_añadir_tarea.innerHTML = '+ Añadir Tarea';
+        label_titulo.textContent = 'Titulo:';
+        btn_aceptar.textContent = 'Aceptar';
+        btn_cancelar.textContent = 'Cancelar';
 
         main_content.appendChild(contenedor);
         contenedor.appendChild(nom_proyecto);
         contenedor.appendChild(btn_añadir_tarea);
+        contenedor.appendChild(form);
+        form.appendChild(label_titulo);
+        form.appendChild(input_titulo);
+        form.appendChild(botones);
+        botones.appendChild(btn_aceptar);
+        botones.appendChild(btn_cancelar);
         contenedor.className = 'contenedor-tareas';
         btn_añadir_tarea.className = 'btn-añadir-tarea';
-        
+        form.className = 'form-añadir-tarea';
+        input_titulo.id = 'titulo-tarea';
+        label_titulo.htmlFor = input_titulo.id;
+                
         let contenedor_nuevo = document.querySelector('.contenedor-tareas')
         contenedor_nuevo.dataset.id = id;
         nom_proyecto.dataset.id = id;

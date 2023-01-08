@@ -54,7 +54,36 @@ header, footer {
 }
 
 .contenedor-tareas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: auto;
+}
 
+.tareas {
+    background-color: #94a3b8;
+    height: 120px;
+    width: 60%;
+}
+
+.btn-añadir-tarea {
+    width: fit-content;
+}
+
+.form-añadir-tarea {
+    display: flex;
+    flex-direction: column;
+    background-color: #64748b;
+    padding: 10px;
+}
+
+input {
+    height: 30px;
+}
+
+button {
+    width: fit-content;
+    height: 30px;
 }
 
 .sidebar,
