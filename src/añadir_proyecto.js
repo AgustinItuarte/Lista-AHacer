@@ -48,6 +48,30 @@ export function añadirProyectoEntorno(evento) {
         nom_proyecto.dataset.id = id;
         btn_añadir_tarea.dataset.id = id;
 
+    } else if (elemento.classList.contains('btn-añadir-tarea')) {
+
+        const contenedor_anterior = document.querySelector('.contenedor-tareas');
+        const main_content = document.querySelector('#contenido');
+        const contenedor = document.createElement('div');
+        const nom_proyecto = document.querySelector('h2');
+        const btn_añadir_tarea = document.createElement('button');
+        const id = elemento.dataset.id;
+
+        contenedor_anterior.remove();
+
+        btn_añadir_tarea.innerHTML = '+ Añadir Tarea';
+
+        main_content.appendChild(contenedor);
+        contenedor.appendChild(nom_proyecto);
+        contenedor.appendChild(btn_añadir_tarea);
+        contenedor.className = 'contenedor-tareas';
+        btn_añadir_tarea.className = 'btn-añadir-tarea';
+        
+        let contenedor_nuevo = document.querySelector('.contenedor-tareas')
+        contenedor_nuevo.dataset.id = id;
+        nom_proyecto.dataset.id = id;
+        btn_añadir_tarea.dataset.id = id;
+
     }
 
 };

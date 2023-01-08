@@ -1,10 +1,8 @@
 import './style.css';
 import {añadirProyecto, añadirProyectoEntorno, poblarUl} from './añadir_proyecto.js';
-import { añadirTarea, listarTareas } from './tareas';
+import { añadirTarea, listarTareas, añadirTareaDom } from './tareas';
 
 poblarUl();
-
-let tareas = [];
 
 const btn_añadir = document.querySelector('.btn-añadirP');
 const btn_aceptar = document.querySelector('.btn-aceptar');
@@ -18,6 +16,8 @@ document.addEventListener('click', añadirProyectoEntorno);
 document.addEventListener('click', añadirTarea);
 
 document.addEventListener('click', listarTareas);
+
+/* document.addEventListener('click', añadirTareaDom); */
 
 btn_cancelar.addEventListener('click', function(e) { 
     e.preventDefault(); 
