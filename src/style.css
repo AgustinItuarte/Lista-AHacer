@@ -63,7 +63,7 @@ header, footer {
 
 .tareas {
     background-color: #94a3b8;
-    height: 120px;
+    height: fit-content;
 }
 
 .btn-añadir-tarea {

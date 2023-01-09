@@ -54,7 +54,9 @@ export function añadirProyectoEntorno(evento) {
         const btn_aceptar = document.createElement('button');
         const btn_cancelar = document.createElement('button');
         const botones = document.createElement('div');
+        const prioridad = document.createElement('select');
 
+        crearPrioridades(prioridad);
         contenedor_anterior.remove();
 
         btn_añadir_tarea.innerHTML = '+ Añadir Tarea';
@@ -73,6 +75,7 @@ export function añadirProyectoEntorno(evento) {
         form.appendChild(input_detalles);
         form.appendChild(label_fecha);
         form.appendChild(fecha);
+        form.appendChild(prioridad);
         form.appendChild(botones);
         botones.appendChild(btn_aceptar);
         botones.appendChild(btn_cancelar);
@@ -117,5 +120,20 @@ export function poblarUl() {
         index++
 
     });
+    
+}
+
+function crearPrioridades(datalist) {
+
+    const prioridades = ['Baja', 'Media', 'Alta'];
+
+    for (let i = 0; i < prioridades.length; i++) {
+        
+        const opcion = document.createElement('option');
+        opcion.value = prioridades[i];
+        opcion.text = prioridades[i];
+        
+        datalist.appendChild(opcion);
+    }
     
 }
