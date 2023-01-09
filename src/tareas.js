@@ -1,10 +1,17 @@
 import { añadirProyectoEntorno } from "./añadir_proyecto";
 
 export default class Tarea{
-    constructor(titulo, id){
+
+    constructor(titulo, detalles, finFecha, id){
+
         this.titulo = titulo;
+        this.detalles = detalles;
+        this.finFecha = finFecha;
+        /* this.prioridad = prioridad; */
         this.id = id;
+
     }
+
 }
 
 export function añadirTarea(evento) {
@@ -15,8 +22,10 @@ export function añadirTarea(evento) {
 
         const form = document.querySelector('.form-añadir-tarea');
         let input_titulo = form.elements[0].value;
+        let detalles = form.elements[1].value;
+        let finFecha = form.elements[2].value;
         
-        let tarea = new Tarea(input_titulo, elemento.dataset.id)
+        let tarea = new Tarea(input_titulo, detalles, finFecha, elemento.dataset.id)
         let tareas = JSON.parse(localStorage.getItem('tareas'));
         if(tareas == null) tareas = [];
 
@@ -45,9 +54,15 @@ export function listarTareas(evento) {
                 let div_tarea = document.createElement('div');
                 div_tarea.className = 'tareas';
                 let titulo = document.createElement('h4');
+                let detalles = document.createElement('p');
+                let fecha = document.createElement('p');
 
                 titulo.textContent = tarea.titulo;
+                detalles.textContent = tarea.detalles;
+                fecha.textContent = tarea.finFecha;
                 div_tarea.appendChild(titulo);
+                div_tarea.appendChild(detalles);
+                div_tarea.appendChild(fecha);
                 contenido.appendChild(div_tarea);
                 
             }

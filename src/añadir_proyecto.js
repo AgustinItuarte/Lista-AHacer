@@ -23,37 +23,56 @@ export function añadirProyecto() {
 export function añadirProyectoEntorno(evento) {
 
     const elemento = evento.target
-    if (elemento.classList.contains('proyecto')) {
+    if (elemento.classList.contains('proyecto') || elemento.classList.contains('btn-aceptar')) {
 
         const contenedor_anterior = document.querySelector('.contenedor-tareas');
         const main_content = document.querySelector('#contenido');
         const contenedor = document.createElement('div');
-        const nom_proyecto = document.createElement('h2');
+
+        if (elemento.classList.contains('btn-aceptar')) { 
+
+            const nom_proyecto = document.querySelector('h2');
+            contenedor.appendChild(nom_proyecto);
+
+        } else {
+
+            const nom_proyecto = document.createElement('h2');
+            nom_proyecto.innerHTML = elemento.textContent;
+            contenedor.appendChild(nom_proyecto);
+            
+        }
+        
         const btn_añadir_tarea = document.createElement('button');
         const id = elemento.dataset.id;
         const form = document.createElement('form');
         const label_titulo = document.createElement('label');
+        const label_detalles = document.createElement('label');
+        const label_fecha = document.createElement('label');
         const input_titulo = document.createElement('input');
-        const wraper1 = document.createElement('div')
+        const input_detalles = document.createElement('textarea');
+        const fecha = document.createElement('input');
         const btn_aceptar = document.createElement('button');
         const btn_cancelar = document.createElement('button');
         const botones = document.createElement('div');
 
         contenedor_anterior.remove();
 
-        nom_proyecto.innerHTML = elemento.textContent;
         btn_añadir_tarea.innerHTML = '+ Añadir Tarea';
         label_titulo.textContent = 'Titulo:';
+        label_detalles.textContent = 'Detalles:';
+        label_fecha.textContent = 'Fecha:';
         btn_aceptar.textContent = 'Aceptar';
         btn_cancelar.textContent = 'Cancelar';
 
         main_content.appendChild(contenedor);
-        contenedor.appendChild(nom_proyecto);
         contenedor.appendChild(btn_añadir_tarea);
         contenedor.appendChild(form);
-        wraper1.appendChild(label_titulo);
-        wraper1.appendChild(input_titulo);
-        form.appendChild(wraper1);
+        form.appendChild(label_titulo);
+        form.appendChild(input_titulo);
+        form.appendChild(label_detalles);
+        form.appendChild(input_detalles);
+        form.appendChild(label_fecha);
+        form.appendChild(fecha);
         form.appendChild(botones);
         botones.appendChild(btn_aceptar);
         botones.appendChild(btn_cancelar);
@@ -75,30 +94,7 @@ export function añadirProyectoEntorno(evento) {
         form.action = 'post'
         input_titulo.name = 'titulo-tarea';
         input_titulo.type = 'text';
-
-    }if (elemento.classList.contains('btn-aceptar')) {
-
-        const contenedor_anterior = document.querySelector('.contenedor-tareas');
-        const main_content = document.querySelector('#contenido');
-        const contenedor = document.createElement('div');
-        const nom_proyecto = document.querySelector('h2');
-        const btn_añadir_tarea = document.createElement('button');
-        const id = elemento.dataset.id;
-
-        contenedor_anterior.remove();
-
-        btn_añadir_tarea.innerHTML = '+ Añadir Tarea';
-
-        main_content.appendChild(contenedor);
-        contenedor.appendChild(nom_proyecto);
-        contenedor.appendChild(btn_añadir_tarea);
-        contenedor.className = 'contenedor-tareas';
-        btn_añadir_tarea.className = 'btn-añadir-tarea';
-        
-        let contenedor_nuevo = document.querySelector('.contenedor-tareas')
-        contenedor_nuevo.dataset.id = id;
-        nom_proyecto.dataset.id = id;
-        btn_añadir_tarea.dataset.id = id;
+        fecha.type = 'date';
 
     }
 

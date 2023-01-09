@@ -77,8 +77,18 @@ header, footer {
     padding: 10px;
 }
 
+input, label,
+textarea {
+    display: block;
+    width: 100%;
+}
+
 input {
     height: 30px;
+}
+
+textarea {
+    height: 90px;
 }
 
 button {
