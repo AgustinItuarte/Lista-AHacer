@@ -34,11 +34,10 @@ export function añadirProyectoEntorno(evento) {
         const form = document.createElement('form');
         const label_titulo = document.createElement('label');
         const input_titulo = document.createElement('input');
+        const wraper1 = document.createElement('div')
         const btn_aceptar = document.createElement('button');
         const btn_cancelar = document.createElement('button');
         const botones = document.createElement('div');
-
-
 
         contenedor_anterior.remove();
 
@@ -52,8 +51,9 @@ export function añadirProyectoEntorno(evento) {
         contenedor.appendChild(nom_proyecto);
         contenedor.appendChild(btn_añadir_tarea);
         contenedor.appendChild(form);
-        form.appendChild(label_titulo);
-        form.appendChild(input_titulo);
+        wraper1.appendChild(label_titulo);
+        wraper1.appendChild(input_titulo);
+        form.appendChild(wraper1);
         form.appendChild(botones);
         botones.appendChild(btn_aceptar);
         botones.appendChild(btn_cancelar);
@@ -62,13 +62,21 @@ export function añadirProyectoEntorno(evento) {
         form.className = 'form-añadir-tarea';
         input_titulo.id = 'titulo-tarea';
         label_titulo.htmlFor = input_titulo.id;
+        btn_aceptar.className = 'btn-aceptar';
+        btn_cancelar.className = 'btn-cancelar';
+
                 
         let contenedor_nuevo = document.querySelector('.contenedor-tareas')
         contenedor_nuevo.dataset.id = id;
         nom_proyecto.dataset.id = id;
         btn_añadir_tarea.dataset.id = id;
+        btn_aceptar.dataset.id = id;
+        form.style.display = 'none';
+        form.action = 'post'
+        input_titulo.name = 'titulo-tarea';
+        input_titulo.type = 'text';
 
-    } else if (elemento.classList.contains('btn-añadir-tarea')) {
+    }if (elemento.classList.contains('btn-aceptar')) {
 
         const contenedor_anterior = document.querySelector('.contenedor-tareas');
         const main_content = document.querySelector('#contenido');

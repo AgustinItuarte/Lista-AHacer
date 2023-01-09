@@ -11,9 +11,12 @@ export function añadirTarea(evento) {
 
     const elemento = evento.target
 
-    if (elemento.classList.contains('btn-añadir-tarea')) {
+    if (elemento.classList.contains('btn-aceptar')) {
 
-        let tarea = new Tarea('Organizar cosas', elemento.dataset.id)
+        const form = document.querySelector('.form-añadir-tarea');
+        let input_titulo = form.elements[0].value;
+        
+        let tarea = new Tarea(input_titulo, elemento.dataset.id)
         let tareas = JSON.parse(localStorage.getItem('tareas'));
         if(tareas == null) tareas = [];
 
@@ -33,7 +36,7 @@ export function listarTareas(evento) {
     if(tareas == null) tareas = [];
     let contenido = document.querySelector('.contenedor-tareas');
     
-    if (elemento.classList.contains('proyecto') || elemento.classList.contains('btn-añadir-tarea')) {
+    if (elemento.classList.contains('proyecto') || elemento.classList.contains('btn-aceptar')) {
 
         tareas.forEach(tarea => {
             
@@ -55,36 +58,26 @@ export function listarTareas(evento) {
 
 }
 
-//Guardas el titulo del proyecto en una variable y luego recargas
-export function añadirTareaDom(evento) {
+export function mostrarFormTareas(evento) {
+    
+    evento.preventDefault();
+    let elemento = evento.target
+    const form = document.querySelector('.form-añadir-tarea');
 
-    const elemento = evento.target
     if (elemento.classList.contains('btn-añadir-tarea')) {
-
-        const contenedor_anterior = document.querySelector('.contenedor-tareas');
-        const nom_proyecto_anterior = document.querySelector('h2')
-        const main_content = document.querySelector('#contenido');
-        const contenedor = document.createElement('div');
-        const nom_proyecto = document.createElement('h2');
-        const btn_añadir_tarea = document.createElement('button');
-        const id = elemento.dataset.id;
-
-        contenedor_anterior.remove();
-
-        nom_proyecto.innerHTML = nom_proyecto_anterior.textContent;
-        btn_añadir_tarea.innerHTML = '+ Añadir Tarea';
-
-        main_content.appendChild(contenedor);
-        contenedor.appendChild(nom_proyecto);
-        contenedor.appendChild(btn_añadir_tarea);
-        contenedor.className = 'contenedor-tareas';
-        btn_añadir_tarea.className = 'btn-añadir-tarea';
-        
-        let contenedor_nuevo = document.querySelector('.contenedor-tareas')
-        contenedor_nuevo.dataset.id = id;
-        nom_proyecto.dataset.id = id;
-        btn_añadir_tarea.dataset.id = id;
-
+        form.style.display = 'block';
     }
 
-};
+}
+
+export function ocultarFormTareas(evento) {
+    
+    evento.preventDefault();
+    let elemento = evento.target
+    const form = document.querySelector('.form-añadir-tarea');
+    
+    if (elemento.classList.contains('btn-cancelar')) {
+        form.style.display = 'none';
+    }
+
+}
