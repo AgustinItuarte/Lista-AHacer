@@ -49,10 +49,10 @@ export function listarTareas(evento) {
     let contenido = document.querySelector('.contenedor-tareas');
     
     if (elemento.classList.contains('proyecto') || elemento.classList.contains('btn-aceptar') || elemento.classList.contains('borrar-tarea') || elemento.classList.contains('total-tareas')) {
-        
+
         tareas.forEach(tarea => {
             
-            if (tarea.id === contenido.dataset.id || elemento.classList.contains('total-tareas')) {
+            if (tarea.id === contenido.dataset.id || elemento.classList.contains('total-tareas') || elemento.dataset.id === 'tareas') {
 
                 if (tarea !== '') {
 
@@ -109,7 +109,6 @@ export function borrarTarea(evento) {
     let elemento = evento.target
     
     if (elemento.classList.contains('borrar-tarea')) {
-        console.log('3')
 
         let tareas = JSON.parse(localStorage.getItem('tareas'));
         if(tareas == null) tareas = [];
