@@ -1,3 +1,5 @@
+import { listarTareas } from "./tareas.js";
+
 export function añadirProyecto() {
 
     let proyectos = JSON.parse(localStorage.getItem('proyectos'));
@@ -23,8 +25,8 @@ export function añadirProyecto() {
 export function añadirProyectoEntorno(evento) {
 
     const elemento = evento.target
-    if (elemento.classList.contains('proyecto') || elemento.classList.contains('btn-aceptar') || elemento.classList.contains('borrar-tarea') ) {
-        console.log('1')
+    if (elemento.classList.contains('proyecto') || elemento.classList.contains('btn-aceptar') || elemento.classList.contains('borrar-tarea') || elemento.classList.contains('total-tareas') ) {
+
         const contenedor_anterior = document.querySelector('.contenedor-tareas');
         const main_content = document.querySelector('#contenido');
         const contenedor = document.createElement('div');
@@ -44,9 +46,15 @@ export function añadirProyectoEntorno(evento) {
             const nom_proyecto = document.createElement('h2');
             nom_proyecto.innerHTML = elemento.textContent;
             contenedor.appendChild(nom_proyecto);
+
+        } if (elemento.classList.contains('total-tareas')) {
+
+            const nom_proyecto = document.createElement('h2');
+            nom_proyecto.innerHTML = 'Tareas';
+            contenedor.appendChild(nom_proyecto);
             
         }
-        
+
         const btn_añadir_tarea = document.createElement('button');
         const id = elemento.dataset.id;
         const form = document.createElement('form');
@@ -92,7 +100,7 @@ export function añadirProyectoEntorno(evento) {
         btn_aceptar.className = 'btn-aceptar';
         btn_cancelar.className = 'btn-cancelar';
 
-                
+
         let contenedor_nuevo = document.querySelector('.contenedor-tareas')
         contenedor_nuevo.dataset.id = id;
         nom_proyecto.dataset.id = id;
@@ -103,6 +111,20 @@ export function añadirProyectoEntorno(evento) {
         input_titulo.name = 'titulo-tarea';
         input_titulo.type = 'text';
         fecha.type = 'date';
+
+        if (elemento.classList.contains('total-tareas')) {
+
+            btn_añadir_tarea.remove();
+            contenedor_nuevo.dataset.id = 'tareas'
+
+        }
+
+        if (elemento.classList.contains('borrar-tarea') && contenedor_nuevo.dataset.id === 'tareas') {
+
+            btn_añadir_tarea.remove();
+            contenedor_nuevo.dataset.id = 'tareas'
+
+        }
 
     }
 

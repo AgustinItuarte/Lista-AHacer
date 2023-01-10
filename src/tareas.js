@@ -48,51 +48,60 @@ export function listarTareas(evento) {
     if(tareas == null) tareas = [];
     let contenido = document.querySelector('.contenedor-tareas');
     
-    if (elemento.classList.contains('proyecto') || elemento.classList.contains('btn-aceptar') || elemento.classList.contains('borrar-tarea') ) {
-        console.log('2')
+    if (elemento.classList.contains('proyecto') || elemento.classList.contains('btn-aceptar') || elemento.classList.contains('borrar-tarea') || elemento.classList.contains('total-tareas')) {
+        
         tareas.forEach(tarea => {
             
-            if (tarea.id === contenido.dataset.id) {
-                
-                let div_tarea = document.createElement('div');
-                let borrar_tarea = document.createElement('div');
-                div_tarea.className = 'tareas';
-                borrar_tarea.className = 'borrar-tarea';
-                let titulo = document.createElement('div');
-                let detalles = document.createElement('div');
-                let fecha = document.createElement('div');
-                let prioridad = document.createElement('div');
+            if (tarea.id === contenido.dataset.id || elemento.classList.contains('total-tareas')) {
 
-                if (tarea.prioridad === 'Baja') {
-                    prioridad.style.backgroundColor = 'green'
-                } if (tarea.prioridad === 'Media') {
-                    prioridad.style.backgroundColor = 'yellow'
-                } if (tarea.prioridad === 'Alta') {
-                    prioridad.style.backgroundColor = 'red'
+                if (tarea !== '') {
+
+                    let div_tarea = document.createElement('div');
+                    let borrar_tarea = document.createElement('div');
+                    div_tarea.className = 'tareas';
+                    borrar_tarea.className = 'borrar-tarea';
+                    let titulo = document.createElement('div');
+                    let detalles = document.createElement('div');
+                    let fecha = document.createElement('div');
+                    let prioridad = document.createElement('div');
+
+                    if (tarea.prioridad === 'Baja') {
+                        prioridad.style.backgroundColor = 'green'
+                    } if (tarea.prioridad === 'Media') {
+                        prioridad.style.backgroundColor = 'yellow'
+                    } if (tarea.prioridad === 'Alta') {
+                        prioridad.style.backgroundColor = 'red'
+                    }
+
+                    titulo.textContent = tarea.titulo;
+                    detalles.textContent = tarea.detalles;
+                    fecha.textContent = tarea.finFecha;
+                    prioridad.textContent = tarea.prioridad;
+                    div_tarea.dataset.posicion = tarea.posicion;
+                    borrar_tarea.dataset.posicion = tarea.posicion;
+
+                    if (elemento.classList.contains('total-tareas')) {
+                        borrar_tarea.dataset.id = 'tareas';
+                    } else {
+                        borrar_tarea.dataset.id = tarea.id;
+                    }
+                    
+                    borrar_tarea.textContent = 'Borrar';
+                    div_tarea.appendChild(titulo);
+                    div_tarea.appendChild(detalles);
+                    div_tarea.appendChild(fecha);
+                    div_tarea.appendChild(prioridad);
+                    div_tarea.appendChild(borrar_tarea);
+                    contenido.appendChild(div_tarea);
+                    
                 }
-
-                titulo.textContent = tarea.titulo;
-                detalles.textContent = tarea.detalles;
-                fecha.textContent = tarea.finFecha;
-                prioridad.textContent = tarea.prioridad;
-                div_tarea.dataset.posicion = tarea.posicion;
-                borrar_tarea.dataset.posicion = tarea.posicion;
-                borrar_tarea.dataset.id = tarea.id;
-                borrar_tarea.textContent = 'Borrar';
-
-                div_tarea.appendChild(titulo);
-                div_tarea.appendChild(detalles);
-                div_tarea.appendChild(fecha);
-                div_tarea.appendChild(prioridad);
-                div_tarea.appendChild(borrar_tarea);
-                contenido.appendChild(div_tarea);
                 
             }
-
+        
         });
 
     }
-
+console.log(tareas)
 }
 
 export function borrarTarea(evento) {
