@@ -42,16 +42,14 @@ export function añadirTarea(evento) {
 }
 
 export function listarTareas(evento) {
-
-    añadirProyectoEntorno(evento);
     
     const elemento = evento.target;
     let tareas = JSON.parse(localStorage.getItem('tareas'));
     if(tareas == null) tareas = [];
     let contenido = document.querySelector('.contenedor-tareas');
     
-    if (elemento.classList.contains('proyecto') || elemento.classList.contains('btn-aceptar')) {
-
+    if (elemento.classList.contains('proyecto') || elemento.classList.contains('btn-aceptar') || elemento.classList.contains('borrar-tarea') ) {
+        console.log('2')
         tareas.forEach(tarea => {
             
             if (tarea.id === contenido.dataset.id) {
@@ -78,6 +76,8 @@ export function listarTareas(evento) {
                 fecha.textContent = tarea.finFecha;
                 prioridad.textContent = tarea.prioridad;
                 div_tarea.dataset.posicion = tarea.posicion;
+                borrar_tarea.dataset.posicion = tarea.posicion;
+                borrar_tarea.dataset.id = tarea.id;
                 borrar_tarea.textContent = 'Borrar';
 
                 div_tarea.appendChild(titulo);
@@ -90,7 +90,25 @@ export function listarTareas(evento) {
             }
 
         });
-        console.log(tareas)
+
+    }
+
+}
+
+export function borrarTarea(evento) {
+
+    let elemento = evento.target
+    
+    if (elemento.classList.contains('borrar-tarea')) {
+        console.log('3')
+
+        let tareas = JSON.parse(localStorage.getItem('tareas'));
+        if(tareas == null) tareas = [];
+        let posicion = elemento.dataset.posicion;
+        tareas[posicion] = '';
+
+        localStorage.setItem('tareas', JSON.stringify(tareas));
+
     }
 
 }

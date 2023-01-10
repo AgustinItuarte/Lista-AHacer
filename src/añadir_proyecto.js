@@ -23,8 +23,8 @@ export function añadirProyecto() {
 export function añadirProyectoEntorno(evento) {
 
     const elemento = evento.target
-    if (elemento.classList.contains('proyecto') || elemento.classList.contains('btn-aceptar')) {
-
+    if (elemento.classList.contains('proyecto') || elemento.classList.contains('btn-aceptar') || elemento.classList.contains('borrar-tarea') ) {
+        console.log('1')
         const contenedor_anterior = document.querySelector('.contenedor-tareas');
         const main_content = document.querySelector('#contenido');
         const contenedor = document.createElement('div');
@@ -34,7 +34,12 @@ export function añadirProyectoEntorno(evento) {
             const nom_proyecto = document.querySelector('h2');
             contenedor.appendChild(nom_proyecto);
 
-        } else {
+        } if (elemento.classList.contains('borrar-tarea')) { 
+
+            const nom_proyecto = document.querySelector('h2');
+            contenedor.appendChild(nom_proyecto);
+
+        }  if (elemento.classList.contains('proyecto')) {
 
             const nom_proyecto = document.createElement('h2');
             nom_proyecto.innerHTML = elemento.textContent;
