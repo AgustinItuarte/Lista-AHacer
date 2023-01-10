@@ -47,7 +47,7 @@ export function listarTareas(evento) {
     let tareas = JSON.parse(localStorage.getItem('tareas'));
     if(tareas == null) tareas = [];
     let contenido = document.querySelector('.contenedor-tareas');
-    
+
     if (elemento.classList.contains('proyecto') || elemento.classList.contains('btn-aceptar') || elemento.classList.contains('borrar-tarea') || elemento.classList.contains('total-tareas')) {
 
         tareas.forEach(tarea => {

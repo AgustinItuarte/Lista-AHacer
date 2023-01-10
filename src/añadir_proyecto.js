@@ -1,5 +1,3 @@
-import { listarTareas } from "./tareas.js";
-
 export function añadirProyecto() {
 
     let proyectos = JSON.parse(localStorage.getItem('proyectos'));
