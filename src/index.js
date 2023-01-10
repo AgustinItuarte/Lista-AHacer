@@ -5,8 +5,8 @@ import { añadirTarea, listarTareas, mostrarFormTareas, ocultarFormTareas } from
 poblarUl();
 
 const btn_añadir = document.querySelector('.btn-añadirP');
-const btn_aceptar = document.querySelector('.btn-aceptar');
-const btn_cancelar = document.querySelector('.btn-cancelar');
+const btn_aceptar = document.querySelector('.btn-aceptar1');
+const btn_cancelar = document.querySelector('.btn-cancelar1');
 const form_proyecto = document.querySelector('.form-proyecto');
 
 btn_añadir.addEventListener('click', () => { form_proyecto.hidden = false;  btn_añadir.hidden = true; });
