@@ -1,4 +1,4 @@
-import { añadirProyectoEntorno } from "./añadir_proyecto";
+import { crearPrioridades } from "./añadir_proyecto.js";
 
 export default class Tarea{
 
@@ -61,7 +61,7 @@ export function listarTareas(evento) {
                     let editar_tarea = document.createElement('div');
                     div_tarea.className = 'tareas';
                     borrar_tarea.className = 'borrar-tarea';
-                    editar_tarea.className = 'editar_tarea';
+                    editar_tarea.className = 'editar-tarea';
                     let titulo = document.createElement('div');
                     let detalles = document.createElement('div');
                     let fecha = document.createElement('div');
@@ -123,6 +123,83 @@ export function borrarTarea(evento) {
         localStorage.setItem('tareas', JSON.stringify(tareas));
 
     }
+
+}
+
+export function editarTarea(evento) {
+
+    let elemento = evento.target;
+    let id = elemento.dataset.id;
+
+    if (elemento.classList.contains('editar-tarea')) {
+
+        let tareas = JSON.parse(localStorage.getItem('tareas'));
+        if(tareas == null) tareas = [];
+
+        let posicion = elemento.dataset.posicion;
+        let titulo = tareas[posicion].titulo;
+        let detalles = tareas[posicion].detalles;
+        let fin_fecha = tareas[posicion].finFecha;
+        let prioridad = tareas[posicion].prioridad;
+
+        generarFormEditar(id);
+        /* tareas[posicion].titulo = prompt('Introduzca nuevo titulo:') */
+
+        localStorage.setItem('tareas', JSON.stringify(tareas));
+
+    }
+
+}
+
+function generarFormEditar(id) {
+
+    const contenedor = document.querySelector('.contenedor-tareas');
+    const form = document.createElement('form');
+    const label_titulo = document.createElement('label');
+    const label_detalles = document.createElement('label');
+    const label_fecha = document.createElement('label');
+    const input_titulo = document.createElement('input');
+    const input_detalles = document.createElement('textarea');
+    const fecha = document.createElement('input');
+    const btn_aceptar = document.createElement('button');
+    const btn_cancelar = document.createElement('button');
+    const botones = document.createElement('div');
+    const prioridad = document.createElement('select');
+
+    crearPrioridades(prioridad);
+
+    label_titulo.textContent = 'Titulo:';
+    label_detalles.textContent = 'Detalles:';
+    label_fecha.textContent = 'Fecha:';
+    btn_aceptar.textContent = 'Aceptar';
+    btn_cancelar.textContent = 'Cancelar';
+
+    contenedor.appendChild(form);
+    form.appendChild(label_titulo);
+    form.appendChild(input_titulo);
+    form.appendChild(label_detalles);
+    form.appendChild(input_detalles);
+    form.appendChild(label_fecha);
+    form.appendChild(fecha);
+    form.appendChild(prioridad);
+    form.appendChild(botones);
+    botones.appendChild(btn_aceptar);
+    botones.appendChild(btn_cancelar);
+
+    form.className = 'form-añadir-tarea';
+    input_titulo.id = 'titulo-tarea';
+    label_titulo.htmlFor = input_titulo.id;
+    btn_aceptar.className = 'btn-aceptar';
+    btn_cancelar.className = 'btn-cancelar';
+
+    btn_aceptar.dataset.id = id;
+    form.style.display = 'none';
+    form.action = 'post'
+    input_titulo.name = 'titulo-tarea';
+    input_titulo.type = 'text';
+    fecha.type = 'date';
+
+    form.style.display = 'block';
 
 }
 

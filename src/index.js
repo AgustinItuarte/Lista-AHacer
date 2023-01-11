@@ -1,6 +1,6 @@
 import './style.css';
 import {añadirProyecto, añadirProyectoEntorno, poblarUl} from './añadir_proyecto.js';
-import { añadirTarea, listarTareas, mostrarFormTareas, ocultarFormTareas, borrarTarea } from './tareas';
+import { añadirTarea, listarTareas, mostrarFormTareas, ocultarFormTareas, borrarTarea, editarTarea } from './tareas';
 
 poblarUl();
 
@@ -14,6 +14,8 @@ btn_añadir.addEventListener('click', () => { form_proyecto.hidden = false;  btn
 document.addEventListener('click', añadirTarea);
 
 document.addEventListener('click', borrarTarea);
+
+document.addEventListener('click', editarTarea);
 
 document.addEventListener('click', añadirProyectoEntorno);
 

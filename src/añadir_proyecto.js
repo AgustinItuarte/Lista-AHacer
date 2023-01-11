@@ -148,7 +148,7 @@ export function poblarUl() {
     
 }
 
-function crearPrioridades(datalist) {
+export function crearPrioridades(datalist) {
 
     const prioridades = ['Baja', 'Media', 'Alta'];
 
