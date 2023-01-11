@@ -1,3 +1,5 @@
+import { generarFormEditar } from "./tareas.js";
+
 export function añadirProyecto() {
 
     let proyectos = JSON.parse(localStorage.getItem('proyectos'));
@@ -29,12 +31,12 @@ export function añadirProyectoEntorno(evento) {
         const main_content = document.querySelector('#contenido');
         const contenedor = document.createElement('div');
 
-        if (elemento.classList.contains('btn-aceptar')) { 
+        if (elemento.classList.contains('btn-aceptar')) {
 
             const nom_proyecto = document.querySelector('h2');
             contenedor.appendChild(nom_proyecto);
 
-        } if (elemento.classList.contains('borrar-tarea')) { 
+        } if (elemento.classList.contains('borrar-tarea')) {
 
             const nom_proyecto = document.querySelector('h2');
             contenedor.appendChild(nom_proyecto);

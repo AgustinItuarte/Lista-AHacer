@@ -82,6 +82,10 @@ export function listarTareas(evento) {
                     div_tarea.dataset.posicion = tarea.posicion;
                     borrar_tarea.dataset.posicion = tarea.posicion;
                     editar_tarea.dataset.posicion = tarea.posicion;
+                    titulo.dataset.posicion = tarea.posicion;
+                    detalles.dataset.posicion = tarea.posicion;
+                    fecha.dataset.posicion = tarea.posicion;
+                    prioridad.dataset.posicion = tarea.posicion;
 
                     if (elemento.classList.contains('total-tareas')) {
                         borrar_tarea.dataset.id = 'tareas';
@@ -98,7 +102,7 @@ export function listarTareas(evento) {
                     div_tarea.appendChild(borrar_tarea);
                     div_tarea.appendChild(editar_tarea);
                     contenido.appendChild(div_tarea);
-                    
+
                 }
                 
             }
@@ -129,6 +133,7 @@ export function borrarTarea(evento) {
 export function editarTarea(evento) {
 
     let elemento = evento.target;
+    let posicion = elemento.dataset.posicion;
     let id = elemento.dataset.id;
 
     if (elemento.classList.contains('editar-tarea')) {
@@ -140,9 +145,9 @@ export function editarTarea(evento) {
         let titulo = tareas[posicion].titulo;
         let detalles = tareas[posicion].detalles;
         let fin_fecha = tareas[posicion].finFecha;
-        let prioridad = tareas[posicion].prioridad;
+        let prioridad1 = tareas[posicion].prioridad;
 
-        generarFormEditar(id);
+        generarFormEditar(posicion, id, titulo, detalles, fin_fecha, prioridad1);
         /* tareas[posicion].titulo = prompt('Introduzca nuevo titulo:') */
 
         localStorage.setItem('tareas', JSON.stringify(tareas));
@@ -151,8 +156,10 @@ export function editarTarea(evento) {
 
 }
 
-function generarFormEditar(id) {
+function generarFormEditar(posicion, id, titulo, detalles, fin_fecha, prioridad1) {
 
+    const tareas = document.querySelectorAll(`div[data-posicion='${posicion}']`);
+    const div_contenedor = tareas[0]
     const contenedor = document.querySelector('.contenedor-tareas');
     const form = document.createElement('form');
     const label_titulo = document.createElement('label');
@@ -168,13 +175,24 @@ function generarFormEditar(id) {
 
     crearPrioridades(prioridad);
 
+    for (let i = 1; i < tareas.length; i++) {
+
+        tareas[i].style.display = 'none'
+        
+    }
+
     label_titulo.textContent = 'Titulo:';
     label_detalles.textContent = 'Detalles:';
     label_fecha.textContent = 'Fecha:';
     btn_aceptar.textContent = 'Aceptar';
     btn_cancelar.textContent = 'Cancelar';
 
-    contenedor.appendChild(form);
+    input_titulo.value = titulo;
+    input_detalles.value = detalles;
+    fecha.value = fin_fecha;
+    prioridad.value = prioridad1;
+
+    div_contenedor.appendChild(form);
     form.appendChild(label_titulo);
     form.appendChild(input_titulo);
     form.appendChild(label_detalles);
