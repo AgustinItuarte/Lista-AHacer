@@ -58,8 +58,10 @@ export function listarTareas(evento) {
 
                     let div_tarea = document.createElement('div');
                     let borrar_tarea = document.createElement('div');
+                    let editar_tarea = document.createElement('div');
                     div_tarea.className = 'tareas';
                     borrar_tarea.className = 'borrar-tarea';
+                    editar_tarea.className = 'editar_tarea';
                     let titulo = document.createElement('div');
                     let detalles = document.createElement('div');
                     let fecha = document.createElement('div');
@@ -79,6 +81,7 @@ export function listarTareas(evento) {
                     prioridad.textContent = tarea.prioridad;
                     div_tarea.dataset.posicion = tarea.posicion;
                     borrar_tarea.dataset.posicion = tarea.posicion;
+                    editar_tarea.dataset.posicion = tarea.posicion;
 
                     if (elemento.classList.contains('total-tareas')) {
                         borrar_tarea.dataset.id = 'tareas';
@@ -87,11 +90,13 @@ export function listarTareas(evento) {
                     }
                     
                     borrar_tarea.textContent = 'Borrar';
+                    editar_tarea.textContent = 'Editar';
                     div_tarea.appendChild(titulo);
                     div_tarea.appendChild(detalles);
                     div_tarea.appendChild(fecha);
                     div_tarea.appendChild(prioridad);
                     div_tarea.appendChild(borrar_tarea);
+                    div_tarea.appendChild(editar_tarea);
                     contenido.appendChild(div_tarea);
                     
                 }
