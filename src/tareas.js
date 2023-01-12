@@ -82,6 +82,7 @@ export function listarTareas(evento) {
                     div_tarea.dataset.posicion = tarea.posicion;
                     borrar_tarea.dataset.posicion = tarea.posicion;
                     editar_tarea.dataset.posicion = tarea.posicion;
+                    editar_tarea.dataset.id = tarea.id;
                     titulo.dataset.posicion = tarea.posicion;
                     detalles.dataset.posicion = tarea.posicion;
                     fecha.dataset.posicion = tarea.posicion;
@@ -104,7 +105,7 @@ export function listarTareas(evento) {
                     contenido.appendChild(div_tarea);
 
                 }
-                console.log(tareas)
+
             }
         
         });
@@ -141,14 +142,14 @@ export function editarTarea(evento) {
         let tareas = JSON.parse(localStorage.getItem('tareas'));
         if(tareas == null) tareas = [];
 
-        let posicion = elemento.dataset.posicion;
+        let posicion1 = posicion;
         let titulo = tareas[posicion].titulo;
         let detalles = tareas[posicion].detalles;
         let fin_fecha = tareas[posicion].finFecha;
         let prioridad1 = tareas[posicion].prioridad;
         let id = tareas[posicion].id;
 
-        generarFormEditar(posicion, id, titulo, detalles, fin_fecha, prioridad1);
+        generarFormEditar(posicion1, id, titulo, detalles, fin_fecha, prioridad1);
 
         localStorage.setItem('tareas', JSON.stringify(tareas));
 
@@ -234,6 +235,7 @@ function generarFormEditar(posicion, id, titulo, detalles, fin_fecha, prioridad1
     prioridad.dataset.posicion = posicion; */
 
     form.dataset.posicion = posicion;
+    form.dataset.id = id;
     btn_aceptar.dataset.id = id;
     input_titulo.id = 'titulo-tarea';
     btn_cancelar.dataset.posicion = posicion;
@@ -276,19 +278,37 @@ export function ocultarFormEditarTareas(evento) {
 
     evento.preventDefault();
     let elemento = evento.target
+    let posicion = elemento.dataset.posicion;
+    let id = elemento.dataset.id;
     
     if (elemento.classList.contains('btn-cancelar-editar')) {
-        
-        let posicion = elemento.dataset.posicion;
+        let form_grupo = document.querySelectorAll(`form[data-id='${id}']`);
+        console.log(form_grupo)
+        /* form_grupo[0].remove(); */
         const tarea = document.querySelectorAll(`div[data-posicion='${posicion}']`);
         let form = document.querySelector(`form[data-posicion='${posicion}']`);
-
+        
         tarea.forEach(div => {
             div.style.display = 'block'
         });
 
         form.remove();
 
-    }
+    } if (elemento.classList.contains('editar-tarea')) {
+
+        let form_grupo = document.querySelectorAll(`form[data-id='${id}']`);
+        const tarea = document.querySelectorAll(`div[data-posicion='${posicion}']`);
+        
+        if (form_grupo.length > 1) {
+            // Necesito seleccionar la posicion anterior guardar el valor porque al darle a otro editar cambia la posicion y no muestra las tareas que quiero. 2 guardar el array de tareas y actuar sobre el valor 0.
+            form_grupo[0].remove();
+            console.log(tarea)
+            /* tarea.forEach(div => {
+                div.style.display = 'block'
+            }); */
+
+        }
+        
+    } 
 
 }
