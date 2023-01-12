@@ -278,12 +278,16 @@ export function ocultarFormEditarTareas(evento) {
     let elemento = evento.target
     
     if (elemento.classList.contains('btn-cancelar-editar')) {
-
+        
         let posicion = elemento.dataset.posicion;
+        const tarea = document.querySelectorAll(`div[data-posicion='${posicion}']`);
         let form = document.querySelector(`form[data-posicion='${posicion}']`);
-        /* let form = document.querySelector('.form-editar-tarea'); */
 
-        form.style.display = 'none';
+        tarea.forEach(div => {
+            div.style.display = 'block'
+        });
+
+        form.remove();
 
     }
 
