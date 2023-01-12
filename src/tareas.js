@@ -30,7 +30,6 @@ export function añadirTarea(evento) {
         let tarea = new Tarea(input_titulo, detalles, finFecha, prioridad, elemento.dataset.id)
         let tareas = JSON.parse(localStorage.getItem('tareas'));
         if(tareas == null) tareas = [];
-        
         tareas.push(tarea);
         let ultimoElem = tareas.length - 1;
         tarea.posicion = ultimoElem;
@@ -88,7 +87,7 @@ export function listarTareas(evento) {
                     fecha.dataset.posicion = tarea.posicion;
                     prioridad.dataset.posicion = tarea.posicion;
 
-                    if (elemento.classList.contains('total-tareas')) {
+                    if (elemento.classList.contains('total-tareas') || elemento.dataset.id === 'tareas') {
                         borrar_tarea.dataset.id = 'tareas';
                     } else {
                         borrar_tarea.dataset.id = tarea.id;
@@ -229,9 +228,6 @@ function generarFormEditar(posicion, id, titulo, detalles, fin_fecha, prioridad1
     btn_aceptar.className = 'btn-aceptar-editar';
     btn_cancelar.className = 'btn-cancelar-editar';
     btn_aceptar.dataset.posicion = posicion;
-    /* detalles.dataset.posicion = posicion;
-    fecha.dataset.posicion = posicion;
-    prioridad.dataset.posicion = posicion; */
 
     form.dataset.posicion = posicion;
     form.dataset.id = id;
@@ -291,31 +287,7 @@ export function ocultarFormEditarTareas(evento) {
 
         form.remove();
 
-    } /* if (elemento.classList.contains('editar-tarea')) {
-
-        let form_grupo = document.querySelector('.form-editar-tarea');
-        let tareas_off = document.querySelectorAll('div[style*="display: none"]');
-console.log(form_grupo)
-        if (form_grupo.length > 1) {
-
-            let form = document.querySelector(`form[data-posicion='${posicion}']`)
-            
-            form_grupo[0].remove();                
-            
-            tareas_off.forEach(elemento => {
-                
-                if (form.dataset.posicion !== elemento.dataset.posicion) {
-
-                    elemento.style.display = 'block'
-                    
-                }
-                
-            });
-            
-        }
-
-    }  */
-     if (elemento.classList.contains('editar-tarea')) {
+    } if (elemento.classList.contains('editar-tarea')) {
 
         let array = JSON.parse(localStorage.getItem('array'));
         if(array == null) array = [];
