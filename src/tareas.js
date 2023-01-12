@@ -150,13 +150,6 @@ export function editarTarea(evento) {
 
         generarFormEditar(posicion, id, titulo, detalles, fin_fecha, prioridad1);
 
-        let form = document.querySelector('.form-editar-tarea');
-        console.log(form.elements[0].value)
-        console.log(form.elements[1].value)
-        console.log(form.elements[2].value)
-        console.log(form.elements[3].value)
-        /* tareas[posicion].titulo = form.elements[0].value; */
-
         localStorage.setItem('tareas', JSON.stringify(tareas));
 
     }
@@ -168,8 +161,18 @@ export function cambiarTareaArray(evento) {
     let elemento = evento.target
 
     if (elemento.classList.contains('btn-aceptar-editar')) {
-        
-        console.log('hola')
+
+        let tareas = JSON.parse(localStorage.getItem('tareas'));
+        if(tareas == null) tareas = [];
+        let form = document.querySelector('.form-editar-tarea');
+        let posicion = elemento.dataset.posicion;
+
+        tareas[posicion].titulo = form.elements[0].value;
+        tareas[posicion].detalles = form.elements[1].value;
+        tareas[posicion].finFecha = form.elements[2].value;
+        tareas[posicion].prioridad = form.elements[3].value;
+
+        localStorage.setItem('tareas', JSON.stringify(tareas));
 
     }
 
@@ -229,6 +232,10 @@ function generarFormEditar(posicion, id, titulo, detalles, fin_fecha, prioridad1
     label_titulo.htmlFor = input_titulo.id;
     btn_aceptar.className = 'btn-aceptar-editar';
     btn_cancelar.className = 'btn-cancelar-editar';
+    btn_aceptar.dataset.posicion = posicion;
+    /* detalles.dataset.posicion = posicion;
+    fecha.dataset.posicion = posicion;
+    prioridad.dataset.posicion = posicion; */
 
     btn_aceptar.dataset.id = id;
     form.style.display = 'none';
