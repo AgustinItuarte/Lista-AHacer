@@ -48,7 +48,7 @@ export function listarTareas(evento) {
     if(tareas == null) tareas = [];
     let contenido = document.querySelector('.contenedor-tareas');
 
-    if (elemento.classList.contains('proyecto') || elemento.classList.contains('btn-aceptar') || elemento.classList.contains('borrar-tarea') || elemento.classList.contains('total-tareas')) {
+    if (elemento.classList.contains('proyecto') || elemento.classList.contains('btn-aceptar') || elemento.classList.contains('borrar-tarea') || elemento.classList.contains('total-tareas') || elemento.classList.contains('btn-cancelar-editar') || elemento.classList.contains('btn-aceptar-editar')) {
 
         tareas.forEach(tarea => {
             
@@ -134,7 +134,7 @@ export function editarTarea(evento) {
 
     let elemento = evento.target;
     let posicion = elemento.dataset.posicion;
-    let id = elemento.dataset.id;
+    
 
     if (elemento.classList.contains('editar-tarea')) {
 
@@ -146,6 +146,7 @@ export function editarTarea(evento) {
         let detalles = tareas[posicion].detalles;
         let fin_fecha = tareas[posicion].finFecha;
         let prioridad1 = tareas[posicion].prioridad;
+        let id = tareas[posicion].id;
 
         generarFormEditar(posicion, id, titulo, detalles, fin_fecha, prioridad1);
         /* tareas[posicion].titulo = prompt('Introduzca nuevo titulo:') */
@@ -206,9 +207,10 @@ function generarFormEditar(posicion, id, titulo, detalles, fin_fecha, prioridad1
 
     form.className = 'form-añadir-tarea';
     input_titulo.id = 'titulo-tarea';
+    btn_cancelar.dataset.id = id;
     label_titulo.htmlFor = input_titulo.id;
-    btn_aceptar.className = 'btn-aceptar';
-    btn_cancelar.className = 'btn-cancelar';
+    btn_aceptar.className = 'btn-aceptar-editar';
+    btn_cancelar.className = 'btn-cancelar-editar';
 
     btn_aceptar.dataset.id = id;
     form.style.display = 'none';

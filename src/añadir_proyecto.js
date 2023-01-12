@@ -25,13 +25,13 @@ export function añadirProyecto() {
 export function añadirProyectoEntorno(evento) {
 
     const elemento = evento.target
-    if (elemento.classList.contains('proyecto') || elemento.classList.contains('btn-aceptar') || elemento.classList.contains('borrar-tarea') || elemento.classList.contains('total-tareas') ) {
+    if (elemento.classList.contains('proyecto') || elemento.classList.contains('btn-aceptar') || elemento.classList.contains('borrar-tarea') || elemento.classList.contains('total-tareas') || elemento.classList.contains('btn-cancelar-editar') || elemento.classList.contains('btn-aceptar-editar') ) {
 
         const contenedor_anterior = document.querySelector('.contenedor-tareas');
         const main_content = document.querySelector('#contenido');
         const contenedor = document.createElement('div');
 
-        if (elemento.classList.contains('btn-aceptar')) {
+        if (elemento.classList.contains('btn-aceptar') || elemento.classList.contains('btn-cancelar-editar') || elemento.classList.contains('btn-aceptar-editar')) {
 
             const nom_proyecto = document.querySelector('h2');
             contenedor.appendChild(nom_proyecto);
