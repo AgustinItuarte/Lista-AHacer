@@ -135,7 +135,6 @@ export function editarTarea(evento) {
 
     let elemento = evento.target;
     let posicion = elemento.dataset.posicion;
-    
 
     if (elemento.classList.contains('editar-tarea')) {
 
@@ -282,9 +281,7 @@ export function ocultarFormEditarTareas(evento) {
     let id = elemento.dataset.id;
     
     if (elemento.classList.contains('btn-cancelar-editar')) {
-        let form_grupo = document.querySelectorAll(`form[data-id='${id}']`);
-        console.log(form_grupo)
-        /* form_grupo[0].remove(); */
+
         const tarea = document.querySelectorAll(`div[data-posicion='${posicion}']`);
         let form = document.querySelector(`form[data-posicion='${posicion}']`);
         
@@ -294,21 +291,83 @@ export function ocultarFormEditarTareas(evento) {
 
         form.remove();
 
-    } if (elemento.classList.contains('editar-tarea')) {
+    } /* if (elemento.classList.contains('editar-tarea')) {
 
-        let form_grupo = document.querySelectorAll(`form[data-id='${id}']`);
-        const tarea = document.querySelectorAll(`div[data-posicion='${posicion}']`);
-        
+        let form_grupo = document.querySelector('.form-editar-tarea');
+        let tareas_off = document.querySelectorAll('div[style*="display: none"]');
+console.log(form_grupo)
         if (form_grupo.length > 1) {
-            // Necesito seleccionar la posicion anterior guardar el valor porque al darle a otro editar cambia la posicion y no muestra las tareas que quiero. 2 guardar el array de tareas y actuar sobre el valor 0.
-            form_grupo[0].remove();
-            console.log(tarea)
-            /* tarea.forEach(div => {
-                div.style.display = 'block'
-            }); */
 
+            let form = document.querySelector(`form[data-posicion='${posicion}']`)
+            
+            form_grupo[0].remove();                
+            
+            tareas_off.forEach(elemento => {
+                
+                if (form.dataset.posicion !== elemento.dataset.posicion) {
+
+                    elemento.style.display = 'block'
+                    
+                }
+                
+            });
+            
         }
+
+    }  */
+     if (elemento.classList.contains('editar-tarea')) {
+
+        let array = JSON.parse(localStorage.getItem('array'));
+        if(array == null) array = [];
+
+        let form = document.querySelector(`form[data-posicion='${posicion}']`)
         
+        array.push(form.dataset.posicion)
+        console.log(array)
+        
+        if (array[0] === array[1]) {
+            let form = document.querySelector(`form[data-posicion='${array[0]}']`)
+            if (form) {
+                form.remove();
+            }
+            
+            let divs = document.querySelectorAll(`div[data-posicion='${array[0]}']`)
+            divs.forEach(elemento => {
+                
+                elemento.style.display = 'block'
+
+            });
+            array = []
+        } if (array.length > 1) {
+
+            let form = document.querySelector(`form[data-posicion='${array[0]}']`)
+            if (form) {
+                form.remove();
+            }
+            let divs = document.querySelectorAll(`div[data-posicion='${array[0]}']`)
+            console.log(divs)
+            array.splice(0, 1);
+
+            divs.forEach(elemento => {
+                
+                elemento.style.display = 'block'
+
+            });
+            
+        }
+
+        localStorage.setItem('array', JSON.stringify(array));
+
     } 
+
+}
+
+function listaArrayForms(evento) {
+
+    let elemento = evento.target;
+
+    if (elemento.contains) {
+        
+    }
 
 }
