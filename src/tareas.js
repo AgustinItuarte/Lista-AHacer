@@ -149,9 +149,27 @@ export function editarTarea(evento) {
         let id = tareas[posicion].id;
 
         generarFormEditar(posicion, id, titulo, detalles, fin_fecha, prioridad1);
-        /* tareas[posicion].titulo = prompt('Introduzca nuevo titulo:') */
+
+        let form = document.querySelector('.form-editar-tarea');
+        console.log(form.elements[0].value)
+        console.log(form.elements[1].value)
+        console.log(form.elements[2].value)
+        console.log(form.elements[3].value)
+        /* tareas[posicion].titulo = form.elements[0].value; */
 
         localStorage.setItem('tareas', JSON.stringify(tareas));
+
+    }
+
+}
+
+export function cambiarTareaArray(evento) {
+    
+    let elemento = evento.target
+
+    if (elemento.classList.contains('btn-aceptar-editar')) {
+        
+        console.log('hola')
 
     }
 
@@ -205,7 +223,7 @@ function generarFormEditar(posicion, id, titulo, detalles, fin_fecha, prioridad1
     botones.appendChild(btn_aceptar);
     botones.appendChild(btn_cancelar);
 
-    form.className = 'form-añadir-tarea';
+    form.className = 'form-editar-tarea';
     input_titulo.id = 'titulo-tarea';
     btn_cancelar.dataset.id = id;
     label_titulo.htmlFor = input_titulo.id;

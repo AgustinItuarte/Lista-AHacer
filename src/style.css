@@ -85,7 +85,8 @@ ul li {
     width: fit-content;
 }
 
-.form-añadir-tarea {
+.form-añadir-tarea,
+.form-editar-tarea {
     display: flex;
     flex-direction: column;
     background-color: #64748b;
