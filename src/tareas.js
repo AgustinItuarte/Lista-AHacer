@@ -48,7 +48,7 @@ export function listarTareas(evento) {
     if(tareas == null) tareas = [];
     let contenido = document.querySelector('.contenedor-tareas');
 
-    if (elemento.classList.contains('proyecto') || elemento.classList.contains('btn-aceptar') || elemento.classList.contains('borrar-tarea') || elemento.classList.contains('total-tareas') || elemento.classList.contains('btn-cancelar-editar') || elemento.classList.contains('btn-aceptar-editar')) {
+    if (elemento.classList.contains('proyecto') || elemento.classList.contains('btn-aceptar') || elemento.classList.contains('borrar-tarea') || elemento.classList.contains('total-tareas') || elemento.classList.contains('btn-aceptar-editar')) {
 
         tareas.forEach(tarea => {
             
@@ -104,13 +104,13 @@ export function listarTareas(evento) {
                     contenido.appendChild(div_tarea);
 
                 }
-                
+                console.log(tareas)
             }
         
         });
 
     }
-console.log(tareas)
+
 }
 
 export function borrarTarea(evento) {
@@ -182,7 +182,6 @@ function generarFormEditar(posicion, id, titulo, detalles, fin_fecha, prioridad1
 
     const tareas = document.querySelectorAll(`div[data-posicion='${posicion}']`);
     const div_contenedor = tareas[0]
-    const contenedor = document.querySelector('.contenedor-tareas');
     const form = document.createElement('form');
     const label_titulo = document.createElement('label');
     const label_detalles = document.createElement('label');
@@ -227,9 +226,6 @@ function generarFormEditar(posicion, id, titulo, detalles, fin_fecha, prioridad1
     botones.appendChild(btn_cancelar);
 
     form.className = 'form-editar-tarea';
-    input_titulo.id = 'titulo-tarea';
-    btn_cancelar.dataset.id = id;
-    label_titulo.htmlFor = input_titulo.id;
     btn_aceptar.className = 'btn-aceptar-editar';
     btn_cancelar.className = 'btn-cancelar-editar';
     btn_aceptar.dataset.posicion = posicion;
@@ -237,7 +233,11 @@ function generarFormEditar(posicion, id, titulo, detalles, fin_fecha, prioridad1
     fecha.dataset.posicion = posicion;
     prioridad.dataset.posicion = posicion; */
 
+    form.dataset.posicion = posicion;
     btn_aceptar.dataset.id = id;
+    input_titulo.id = 'titulo-tarea';
+    btn_cancelar.dataset.posicion = posicion;
+    label_titulo.htmlFor = input_titulo.id;
     form.style.display = 'none';
     form.action = 'post'
     input_titulo.name = 'titulo-tarea';
@@ -268,6 +268,23 @@ export function ocultarFormTareas(evento) {
     
     if (elemento.classList.contains('btn-cancelar')) {
         form.style.display = 'none';
+    }
+
+}
+
+export function ocultarFormEditarTareas(evento) {
+
+    evento.preventDefault();
+    let elemento = evento.target
+    
+    if (elemento.classList.contains('btn-cancelar-editar')) {
+
+        let posicion = elemento.dataset.posicion;
+        let form = document.querySelector(`form[data-posicion='${posicion}']`);
+        /* let form = document.querySelector('.form-editar-tarea'); */
+
+        form.style.display = 'none';
+
     }
 
 }
