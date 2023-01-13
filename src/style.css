@@ -20,7 +20,7 @@ body {
     width: 100vw;
     font-size: 1.5rem;
     font-family: 'Josefin Sans';
-    background-color: #cbd5e1;
+    background-color: #94a3b8;
 }
 
 header {
@@ -34,13 +34,13 @@ header {
 #contenido {
     display: grid;
     grid-template-columns: 20% 80%;
-    height: 79vh;
+    height: 81vh;
     width: 100vw;
     font-size: 1.5rem;
 }
 
 footer {
-    height: 6vh;
+    height: 4vh;
     font-size: 0.9rem;
     display: flex;
     align-items: center;
@@ -50,24 +50,61 @@ footer {
 header, footer {
     background-color: #1e293b;
     color: #f8fafc;
+    border-bottom: 3px solid #f8fafc;
 }
 
 .sidebar {
     background-color: #64748b;
+    font-size: 1.5rem;
+    box-shadow: 0px 0px 5px black;
 }
 
 .total-tareas {
     font-weight: bold;
     cursor: pointer;
+    padding-bottom: 10px;
+}
+
+.total-tareas:hover {
+    color: black;
+    transition: 0.1s;
+}
+
+.proyectos_titulo,
+.total-tareas {
+    color: white;
+    font-size: 1.7rem;
 }
 
 ul {
     cursor: default;
+    padding-top: 10px;
 }
 
 ul li {
     list-style: none;
     padding-left: 14px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+ul li:hover {
+    background-color: #94a3b8;
+    transition: 0.1s;
+}
+
+ul li:active {
+    box-shadow: 0px 0px 5px black;
+}
+
+.btn-añadirP {
+    cursor: pointer;
+    border: none;
+    background-color: #94a3b8;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .main-content {
@@ -83,9 +120,11 @@ ul li {
 }
 
 .tareas {
-    background-color: #94a3b8;
+    background-color: #64748b;
     height: fit-content;
     cursor: pointer;
+    border: 1px solid black;
+    padding: 5px;
 }
 
 .btn-añadir-tarea {

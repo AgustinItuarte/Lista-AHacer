@@ -47,11 +47,17 @@ export function listarTareas(evento) {
     if(tareas == null) tareas = [];
     let contenido = document.querySelector('.contenedor-tareas');
 
-    if (elemento.classList.contains('proyecto') || elemento.classList.contains('btn-aceptar') || elemento.classList.contains('borrar-tarea') || elemento.classList.contains('total-tareas') || elemento.classList.contains('btn-aceptar-editar')) {
+    if (elemento.classList.contains('proyecto') ||
+     elemento.classList.contains('btn-aceptar') ||
+      elemento.classList.contains('borrar-tarea') ||
+       elemento.classList.contains('total-tareas') ||
+        elemento.classList.contains('btn-aceptar-editar')) {
 
         tareas.forEach(tarea => {
             
-            if (tarea.id === contenido.dataset.id || elemento.classList.contains('total-tareas') || elemento.dataset.id === 'tareas') {
+            if (tarea.id === contenido.dataset.id ||
+                 elemento.classList.contains('total-tareas') ||
+                  elemento.dataset.id === 'tareas') {
 
                 if (tarea !== '') {
 
