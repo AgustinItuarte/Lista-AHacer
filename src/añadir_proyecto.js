@@ -51,9 +51,7 @@ export function añadirProyectoEntorno(evento) {
             nom_proyecto.innerHTML = 'Tareas';
             contenedor.appendChild(nom_proyecto);
             
-        }
-
-        let contenedor_tareas_totales = document.querySelector(`div[data-id='tareas']`);
+        } 
 
         const btn_añadir_tarea = document.createElement('button');
         const id = elemento.dataset.id;
@@ -80,11 +78,7 @@ export function añadirProyectoEntorno(evento) {
         btn_cancelar.textContent = 'Cancelar';
 
         main_content.appendChild(contenedor);
-
-        if (!contenedor_tareas_totales) {
-            contenedor.appendChild(btn_añadir_tarea);
-        }  
-       
+        contenedor.appendChild(btn_añadir_tarea);
         contenedor.appendChild(form);
         form.appendChild(label_titulo);
         form.appendChild(input_titulo);
@@ -127,6 +121,12 @@ export function añadirProyectoEntorno(evento) {
 
             btn_añadir_tarea.remove();
             contenedor_nuevo.dataset.id = 'tareas'
+
+        }
+
+        if (elemento.dataset.id === 'tareas') {
+
+            btn_añadir_tarea.remove();
 
         }
 
