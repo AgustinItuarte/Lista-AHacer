@@ -179,6 +179,7 @@ export function cambiarTareaArray(evento) {
 
 function generarFormEditar(posicion, id, titulo, detalles, fin_fecha, prioridad1) {
 
+    let contenedor_tareas_totales = document.querySelector(`div[data-id='tareas']`);
     const tareas = document.querySelectorAll(`div[data-posicion='${posicion}']`);
     const div_contenedor = tareas[0]
     const form = document.createElement('form');
@@ -231,7 +232,13 @@ function generarFormEditar(posicion, id, titulo, detalles, fin_fecha, prioridad1
 
     form.dataset.posicion = posicion;
     form.dataset.id = id;
-    btn_aceptar.dataset.id = id;
+    
+    if (contenedor_tareas_totales) {
+        btn_aceptar.dataset.id = 'tareas';
+    } else {
+        btn_aceptar.dataset.id = id;
+    }
+    
     input_titulo.id = 'titulo-tarea';
     btn_cancelar.dataset.posicion = posicion;
     label_titulo.htmlFor = input_titulo.id;
@@ -274,7 +281,6 @@ export function ocultarFormEditarTareas(evento) {
     evento.preventDefault();
     let elemento = evento.target
     let posicion = elemento.dataset.posicion;
-    let id = elemento.dataset.id;
     
     if (elemento.classList.contains('btn-cancelar-editar')) {
 
@@ -295,9 +301,9 @@ export function ocultarFormEditarTareas(evento) {
         let form = document.querySelector(`form[data-posicion='${posicion}']`)
         
         array.push(form.dataset.posicion)
-        console.log(array)
         
         if (array[0] === array[1]) {
+
             let form = document.querySelector(`form[data-posicion='${array[0]}']`)
             if (form) {
                 form.remove();
@@ -310,6 +316,7 @@ export function ocultarFormEditarTareas(evento) {
 
             });
             array = []
+
         } if (array.length > 1) {
 
             let form = document.querySelector(`form[data-posicion='${array[0]}']`)
@@ -317,7 +324,7 @@ export function ocultarFormEditarTareas(evento) {
                 form.remove();
             }
             let divs = document.querySelectorAll(`div[data-posicion='${array[0]}']`)
-            console.log(divs)
+
             array.splice(0, 1);
 
             divs.forEach(elemento => {
@@ -331,15 +338,5 @@ export function ocultarFormEditarTareas(evento) {
         localStorage.setItem('array', JSON.stringify(array));
 
     } 
-
-}
-
-function listaArrayForms(evento) {
-
-    let elemento = evento.target;
-
-    if (elemento.contains) {
-        
-    }
 
 }
