@@ -35,7 +35,7 @@ export function añadirTarea(evento) {
         tarea.posicion = ultimoElem;
 
         localStorage.setItem('tareas', JSON.stringify(tareas));
-        console.log(tareas);
+
     }
 
 }
@@ -64,13 +64,18 @@ export function listarTareas(evento) {
                     let div_tarea = document.createElement('div');
                     let borrar_tarea = document.createElement('div');
                     let editar_tarea = document.createElement('div');
-                    div_tarea.className = 'tareas';
-                    borrar_tarea.className = 'borrar-tarea';
-                    editar_tarea.className = 'editar-tarea';
                     let titulo = document.createElement('div');
                     let detalles = document.createElement('div');
                     let fecha = document.createElement('div');
                     let prioridad = document.createElement('div');
+
+                    titulo.className = 'titulo-tareas';
+                    detalles.className = 'detalles-tareas';
+                    fecha.className = 'fecha-tareas';
+                    div_tarea.className = 'tareas';
+                    borrar_tarea.className = 'borrar-tarea';
+                    editar_tarea.className = 'editar-tarea';
+                    prioridad.className = 'prioridad-tareas';
 
                     if (tarea.prioridad === 'Baja') {
                         prioridad.style.backgroundColor = 'green'
@@ -83,7 +88,6 @@ export function listarTareas(evento) {
                     titulo.textContent = tarea.titulo;
                     detalles.textContent = tarea.detalles;
                     fecha.textContent = tarea.finFecha;
-                    prioridad.textContent = tarea.prioridad;
                     div_tarea.dataset.posicion = tarea.posicion;
                     borrar_tarea.dataset.posicion = tarea.posicion;
                     editar_tarea.dataset.posicion = tarea.posicion;
@@ -186,7 +190,7 @@ export function cambiarTareaArray(evento) {
 function generarFormEditar(posicion, id, titulo, detalles, fin_fecha, prioridad1) {
 
     let contenedor_tareas_totales = document.querySelector(`div[data-id='tareas']`);
-    const tareas = document.querySelectorAll(`div[data-posicion='${posicion}']`);
+    const tareas = document.querySelectorAll(`div[data-posicion='${posicion}'`);
     const div_contenedor = tareas[0]
     const form = document.createElement('form');
     const label_titulo = document.createElement('label');
@@ -255,6 +259,8 @@ function generarFormEditar(posicion, id, titulo, detalles, fin_fecha, prioridad1
     fecha.type = 'date';
 
     form.style.display = 'block';
+    div_contenedor.style.display = 'block';
+    div_contenedor.style.height = 'fit-content';
 
 }
 
@@ -287,23 +293,24 @@ export function ocultarFormEditarTareas(evento) {
     evento.preventDefault();
     let elemento = evento.target
     let posicion = elemento.dataset.posicion;
-    
+
     if (elemento.classList.contains('btn-cancelar-editar')) {
 
         const tarea = document.querySelectorAll(`div[data-posicion='${posicion}']`);
         let form = document.querySelector(`form[data-posicion='${posicion}']`);
         
         tarea.forEach(div => {
-            div.style.display = 'block'
+            div.style.display = 'block';
         });
 
+        tarea[0].style.display = 'grid';
         form.remove();
 
     } if (elemento.classList.contains('editar-tarea')) {
 
         let array = JSON.parse(localStorage.getItem('array'));
         if(array == null) array = [];
-
+        console.log(array)
         let form = document.querySelector(`form[data-posicion='${posicion}']`)
         
         array.push(form.dataset.posicion)
@@ -321,6 +328,8 @@ export function ocultarFormEditarTareas(evento) {
                 elemento.style.display = 'block'
 
             });
+
+            divs[0].style.display = 'grid';
             array = []
 
         } if (array.length > 1) {
@@ -338,7 +347,9 @@ export function ocultarFormEditarTareas(evento) {
                 elemento.style.display = 'block'
 
             });
-            
+
+            divs[0].style.display = 'grid';
+
         }
 
         localStorage.setItem('array', JSON.stringify(array));
