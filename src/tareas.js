@@ -344,7 +344,7 @@ export function ocultarFormEditarTareas(evento) {
 
         let array = JSON.parse(localStorage.getItem('array'));
         if(array == null) array = [];
-        console.log(array)
+
         let form = document.querySelector(`form[data-posicion='${posicion}']`)
         
         array.push(form.dataset.posicion)
