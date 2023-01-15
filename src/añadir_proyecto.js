@@ -51,7 +51,7 @@ export function añadirProyectoEntorno(evento) {
             nom_proyecto.innerHTML = 'Tareas';
             contenedor.appendChild(nom_proyecto);
             
-        } 
+        }
 
         const btn_añadir_tarea = document.createElement('button');
         const id = elemento.dataset.id;
@@ -90,6 +90,7 @@ export function añadirProyectoEntorno(evento) {
         form.appendChild(botones);
         botones.appendChild(btn_aceptar);
         botones.appendChild(btn_cancelar);
+
         contenedor.className = 'contenedor-tareas';
         btn_añadir_tarea.className = 'btn-añadir-tarea';
         form.className = 'form-añadir-tarea';
@@ -97,6 +98,8 @@ export function añadirProyectoEntorno(evento) {
         label_titulo.htmlFor = input_titulo.id;
         btn_aceptar.className = 'btn-aceptar';
         btn_cancelar.className = 'btn-cancelar';
+
+        input_titulo.setAttribute('required', '');
 
 
         let contenedor_nuevo = document.querySelector('.contenedor-tareas')

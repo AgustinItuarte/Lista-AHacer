@@ -22,19 +22,30 @@ export function añadirTarea(evento) {
     if (elemento.classList.contains('btn-aceptar')) {
 
         const form = document.querySelector('.form-añadir-tarea');
+        
         let input_titulo = form.elements[0].value;
         let detalles = form.elements[1].value;
         let finFecha = form.elements[2].value;
         let prioridad = form.elements[3].value;
-        
-        let tarea = new Tarea(input_titulo, detalles, finFecha, prioridad, elemento.dataset.id)
-        let tareas = JSON.parse(localStorage.getItem('tareas'));
-        if(tareas == null) tareas = [];
-        tareas.push(tarea);
-        let ultimoElem = tareas.length - 1;
-        tarea.posicion = ultimoElem;
 
-        localStorage.setItem('tareas', JSON.stringify(tareas));
+        if (input_titulo !== '' && detalles !== '' && finFecha !== '' && prioridad !== '') {
+
+            let tarea = new Tarea(input_titulo, detalles, finFecha, prioridad, elemento.dataset.id)
+            let tareas = JSON.parse(localStorage.getItem('tareas'));
+            if(tareas == null) tareas = [];
+            tareas.push(tarea);
+            let ultimoElem = tareas.length - 1;
+            tarea.posicion = ultimoElem;
+
+            localStorage.setItem('tareas', JSON.stringify(tareas));
+
+        } else {
+
+            alert('Hay campos vacios');
+
+        }
+        
+        
 
     }
 
@@ -102,9 +113,7 @@ export function listarTareas(evento) {
                     } else {
                         borrar_tarea.dataset.id = tarea.id;
                     }
-                    
-                    borrar_tarea.textContent = 'Borrar';
-                    editar_tarea.textContent = 'Editar';
+
                     div_tarea.appendChild(titulo);
                     div_tarea.appendChild(detalles);
                     div_tarea.appendChild(fecha);
@@ -176,12 +185,22 @@ export function cambiarTareaArray(evento) {
         let form = document.querySelector('.form-editar-tarea');
         let posicion = elemento.dataset.posicion;
 
-        tareas[posicion].titulo = form.elements[0].value;
-        tareas[posicion].detalles = form.elements[1].value;
-        tareas[posicion].finFecha = form.elements[2].value;
-        tareas[posicion].prioridad = form.elements[3].value;
+        
 
-        localStorage.setItem('tareas', JSON.stringify(tareas));
+        if (form.elements[0].value !== '' && form.elements[1].value !== '' && form.elements[2].value !== '' && form.elements[3].value !== '') {
+
+            tareas[posicion].titulo = form.elements[0].value;
+            tareas[posicion].detalles = form.elements[1].value;
+            tareas[posicion].finFecha = form.elements[2].value;
+            tareas[posicion].prioridad = form.elements[3].value;
+
+            localStorage.setItem('tareas', JSON.stringify(tareas));
+
+        } else {
+
+            alert('Hay campos vacios');
+
+        }
 
     }
 
@@ -294,6 +313,17 @@ export function ocultarFormEditarTareas(evento) {
     let elemento = evento.target
     let posicion = elemento.dataset.posicion;
 
+    if (elemento.classList.contains('proyecto')) {
+
+        let array = JSON.parse(localStorage.getItem('array'));
+        if(array == null) array = [];        
+
+        array = [];
+
+
+        localStorage.setItem('array', JSON.stringify(array));
+    }
+
     if (elemento.classList.contains('btn-cancelar-editar')) {
 
         const tarea = document.querySelectorAll(`div[data-posicion='${posicion}']`);
@@ -301,6 +331,10 @@ export function ocultarFormEditarTareas(evento) {
         
         tarea.forEach(div => {
             div.style.display = 'block';
+
+            if (div.classList.contains('fecha-tareas')) {
+                div.style.display = 'flex'
+            }
         });
 
         tarea[0].style.display = 'grid';
@@ -327,6 +361,9 @@ export function ocultarFormEditarTareas(evento) {
                 
                 elemento.style.display = 'block'
 
+                if (elemento.classList.contains('fecha-tareas')) {
+                    elemento.style.display = 'flex'
+                }
             });
 
             divs[0].style.display = 'grid';
@@ -345,6 +382,10 @@ export function ocultarFormEditarTareas(evento) {
             divs.forEach(elemento => {
                 
                 elemento.style.display = 'block'
+
+                if (elemento.classList.contains('fecha-tareas')) {
+                    elemento.style.display = 'flex'
+                }
 
             });
 

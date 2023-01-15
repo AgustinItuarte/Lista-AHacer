@@ -132,17 +132,42 @@ button:active {
 .tareas {
     display: grid;
     align-items: center;
+    align-self: center;
     grid-template-columns: 1% 15% 55% 15% 14%;
     grid-template-rows: 50% 50%;
     background-color: #64748b;
-    height: 100px;
+    height: fit-content;
     width: 100%;
     border: 3px solid black;
     border-radius: 5px;
 }
 
+.tareas:hover {
+    transition: 0.3s;
+    background-color: #525f70;
+    cursor: pointer;
+    color: white;
+}
+
+.tareas:active {
+    transition: 0.2s;
+    border: 3px solid white;
+}
+
 .titulo-tareas {
     grid-column: 2 / 3;
+}
+
+.detalles-tareas {
+    grid-column: 2 / 4;
+    grid-row: 2 / 3;
+}
+
+.fecha-tareas {
+    display: flex;
+    justify-content: end;
+    padding-right: 250px;
+    padding-top: 55px;
 }
 
 .prioridad-tareas {
@@ -154,8 +179,36 @@ button:active {
 
 .borrar-tarea,
 .editar-tarea {
+    grid-row: 1 / 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    cursor: pointer;
+    width: 12%;
+}
+
+.borrar-tarea {
     grid-column: 5 / 6;
-    width: 100%;
+    content: url('./delete.png');
+}
+
+.editar-tarea {
+    grid-column: 4 / 5;
+    content: url('./text-box-edit.png');
+}
+
+.borrar-tarea:hover,
+.editar-tarea:hover {
+    background-color: #94a3b8;
+    border-radius: 3px;
+}
+
+.borrar-tarea:active,
+.editar-tarea:active {
+    background-color: #94a3b8;
+    border-radius: 3px;
+    box-shadow: 1px 1px 5px black;
 }
 
 .btn-añadir-tarea {
@@ -182,11 +235,6 @@ input {
 
 textarea {
     height: 90px;
-}
-
-button {
-    width: fit-content;
-    height: 30px;
 }
 
 .sidebar,
