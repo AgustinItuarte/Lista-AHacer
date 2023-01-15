@@ -89,11 +89,11 @@ export function listarTareas(evento) {
                     prioridad.className = 'prioridad-tareas';
 
                     if (tarea.prioridad === 'Baja') {
-                        prioridad.style.backgroundColor = 'green'
+                        prioridad.style.backgroundColor = '#16a34a'
                     } if (tarea.prioridad === 'Media') {
-                        prioridad.style.backgroundColor = 'yellow'
+                        prioridad.style.backgroundColor = '#fcd34d'
                     } if (tarea.prioridad === 'Alta') {
-                        prioridad.style.backgroundColor = 'red'
+                        prioridad.style.backgroundColor = '#b91c1c'
                     }
 
                     titulo.textContent = tarea.titulo;

@@ -22,7 +22,9 @@ export function añadirProyecto() {
         localStorage.setItem('proyectos', JSON.stringify(proyectos));
 
     } else {
+
         alert('Hay campos vacios');
+        
     }
 
 
