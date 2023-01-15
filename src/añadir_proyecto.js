@@ -6,17 +6,25 @@ export function añadirProyecto() {
     const form_proyecto = document.querySelector('.form-proyecto');
     let ultimoElem = proyectos.length - 1;
     const proyectosUl = document.querySelector('ul');
-    const proyecto = document.createElement('li');
 
-    proyecto.dataset.id = `${ultimoElem + 1}`;
-    proyecto.className = 'proyecto';
+    if (form_proyecto.elements[0].value !== '') {
 
-    proyecto.textContent = form_proyecto.elements[0].value;
-    proyectos.push(proyecto.textContent);
+        const proyecto = document.createElement('li');
 
-    proyectosUl.appendChild(proyecto);
+        proyecto.dataset.id = `${ultimoElem + 1}`;
+        proyecto.className = 'proyecto';
 
-    localStorage.setItem('proyectos', JSON.stringify(proyectos));
+        proyecto.textContent = form_proyecto.elements[0].value;
+        proyectos.push(proyecto.textContent);
+
+        proyectosUl.appendChild(proyecto);
+
+        localStorage.setItem('proyectos', JSON.stringify(proyectos));
+
+    } else {
+        alert('Hay campos vacios');
+    }
+
 
 };
 
