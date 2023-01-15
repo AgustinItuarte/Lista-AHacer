@@ -35,7 +35,7 @@ export function añadirTarea(evento) {
         tarea.posicion = ultimoElem;
 
         localStorage.setItem('tareas', JSON.stringify(tareas));
-
+        console.log(tareas);
     }
 
 }
