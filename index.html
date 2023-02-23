@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>A-Hacer</title>
+</head>
+<body>
+    <header>
+        <h1>A-Hacer</h1>
+    </header>
+    <div id='contenido'>
+        <div class="sidebar">
+            <div class="total-tareas">Tareas</div>
+            <hr>
+            <ul><strong class="proyectos_titulo">Proyectos</strong></ul>
+            <button class="btn-añadirP">+ Añadir Proyecto</button>
+            <form action="post" class="form-proyecto" hidden>
+                <input type="text" id="nom_proyecto" name="nom_proyecto" required>
+                <button class="btn-aceptar1">Aceptar</button> <button class="btn-cancelar1">Cancelar</button>
+            </form>
+        </div>
+        <div class="contenedor-tareas"></div>
+    </div>
+    <footer><h3>Copyright @ 2022 AgustinItuarte </h3></footer>
+</body>
+<script src="main.js"></script>
+</html>
